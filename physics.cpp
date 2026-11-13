@@ -9,7 +9,7 @@ double gravityFromDistance(double distance)
    return EARTH_GRAVITATIONAL_PARAMETER / (distance * distance);
 }
 
-void computeGravity(const Position& position, double& ddx, double& ddy)
+Acceleration computeGravity(const Position& position)
 {
    const double x = position.getMetersX();
    const double y = position.getMetersY();
@@ -18,30 +18,30 @@ void computeGravity(const Position& position, double& ddx, double& ddy)
    assert(distance > 0.0);
 
    const double gravity = gravityFromDistance(distance);
-   ddx = gravity * (-x / distance);
-   ddy = gravity * (-y / distance);
+   return Acceleration(gravity * (-x / distance),
+                       gravity * (-y / distance));
 }
 
 void updatePosition(Position& position, const Velocity& velocity,
-                    double ddx, double ddy, double time)
+                     const Acceleration& acceleration, double time)
 {
    const double timeSquared = time * time;
 
-   position.addMetersX(velocity.getDX() * time + 0.5 * ddx * timeSquared);
-   position.addMetersY(velocity.getDY() * time + 0.5 * ddy * timeSquared);
+   position.addMetersX(velocity.getDX() * time +
+                       0.5 * acceleration.getDDX() * timeSquared);
+   position.addMetersY(velocity.getDY() * time +
+                       0.5 * acceleration.getDDY() * timeSquared);
 }
 
-void updateVelocity(Velocity& velocity, double ddx, double ddy, double time)
+void updateVelocity(Velocity& velocity, const Acceleration& acceleration,
+                    double time)
 {
-   velocity.add(ddx, ddy, time);
+   velocity.add(acceleration, time);
 }
 
 void physicsStep(Position& position, Velocity& velocity, double time)
 {
-   double ddx;
-   double ddy;
-
-   computeGravity(position, ddx, ddy);
-   updatePosition(position, velocity, ddx, ddy, time);
-   updateVelocity(velocity, ddx, ddy, time);
+   Acceleration acceleration = computeGravity(position);
+   updatePosition(position, velocity, acceleration, time);
+   updateVelocity(velocity, acceleration, time);
 }

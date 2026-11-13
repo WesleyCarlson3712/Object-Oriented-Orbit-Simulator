@@ -17,11 +17,13 @@ public:
       getDX();
       getDY();
       getSpeed();
+      getAngle();
       setDX();
       setDY();
       addDX();
       addDY();
       add();
+      addAcceleration();
 
       report("Velocity");
    }
@@ -65,6 +67,13 @@ private:
       assertEquals(velocity.getSpeed(), 5.0);
    }
 
+   void getAngle()
+   {
+      Velocity velocity(3.0, 4.0);
+
+      assertEquals(velocity.getAngle().getRadians(), std::atan2(4.0, 3.0));
+   }
+
    void setDX()
    {
       Velocity velocity(10.0, 20.0);
@@ -100,7 +109,19 @@ private:
    void add()
    {
       Velocity velocity(10.0, 20.0);
-      velocity.add(2.0, -4.0, 3.0);
+      Acceleration acceleration(2.0, -4.0);
+      velocity.add(acceleration, 3.0);
+      assertEquals(velocity.dx, 16.0);
+      assertEquals(velocity.dy, 8.0);
+   }
+
+   void addAcceleration()
+   {
+      Velocity velocity(10.0, 20.0);
+      Acceleration acceleration(2.0, -4.0);
+
+      velocity.add(acceleration, 3.0);
+
       assertEquals(velocity.dx, 16.0);
       assertEquals(velocity.dy, 8.0);
    }

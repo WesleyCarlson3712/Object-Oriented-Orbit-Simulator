@@ -5,8 +5,15 @@ double Velocity::getSpeed() const
    return std::sqrt(dx * dx + dy * dy);
 }
 
-void Velocity::add(double ddx, double ddy, double time)
+Angle Velocity::getAngle() const
 {
-   dx += ddx * time;
-   dy += ddy * time;
+   Angle angle;
+   angle.setDxDy(dx, dy);
+   return angle;
+}
+
+void Velocity::add(const Acceleration& acceleration, double time)
+{
+   dx += acceleration.getDDX() * time;
+   dy += acceleration.getDDY() * time;
 }

@@ -19,10 +19,14 @@ public:
       // Getters
       getRadians();
       getDegrees();
+      getDx();
+      getDy();
 
       // Setters
       setRadians();
       setDegrees();
+      setDxDy();
+      add();
 
       report("Angle");
    }
@@ -57,6 +61,20 @@ private:
       assertEquals(angle.getDegrees(), 90.0);
    }
 
+   void getDx()
+   {
+      Angle angle(Angle::PI / 3.0);
+
+      assertEquals(angle.getDx(), 0.5);
+   }
+
+   void getDy()
+   {
+      Angle angle(Angle::PI / 6.0);
+
+      assertEquals(angle.getDy(), 0.5);
+   }
+
    void setRadians()
    {
       Angle angle;
@@ -73,5 +91,22 @@ private:
 
       assertEquals(angle.radians, Angle::PI * 1.5);
       assertEquals(angle.getDegrees(), 270.0);
+   }
+
+   void setDxDy()
+   {
+      Angle angle;
+      angle.setDxDy(0.0, -1.0);
+
+      assertEquals(angle.getRadians(), -Angle::PI / 2.0);
+   }
+
+   void add()
+   {
+      Angle angle(Angle::PI / 4.0);
+      Angle& result = angle.add(Angle::PI / 4.0);
+
+      assertUnit(&result == &angle);
+      assertEquals(angle.getRadians(), Angle::PI / 2.0);
    }
 };

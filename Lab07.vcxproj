@@ -139,7 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Lab07.cpp" />
+    <ClCompile Include="acceleration.cpp" />
+    <ClCompile Include="simulation.cpp" />
     <ClCompile Include="physics.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />
@@ -148,10 +149,12 @@
     <ClCompile Include="velocity.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="acceleration.h" />
     <ClInclude Include="angle.h" />
     <ClInclude Include="physics.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="test.h" />
+    <ClInclude Include="testAcceleration.h" />
     <ClInclude Include="testAngle.h" />
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="testVelocity.h" />

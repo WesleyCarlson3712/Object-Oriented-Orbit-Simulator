@@ -1,5 +1,6 @@
 #pragma once
 
+#include "acceleration.h"
 #include "position.h"
 #include "velocity.h"
 
@@ -20,20 +21,21 @@ double gravityFromDistance(double distance);
  * Determine the horizontal and vertical acceleration caused
  * by Earth's gravity at a position relative to Earth's center.
  *********************************************************/
-void computeGravity(const Position& position, double& ddx, double& ddy);
+Acceleration computeGravity(const Position& position);
 
 /*********************************************************
  * UPDATE POSITION
  * Update position using velocity and acceleration.
  *********************************************************/
 void updatePosition(Position& position, const Velocity& velocity,
-                    double ddx, double ddy, double time);
+                    const Acceleration& acceleration, double time);
 
 /*********************************************************
  * UPDATE VELOCITY
  * Update velocity using acceleration over time.
  *********************************************************/
-void updateVelocity(Velocity& velocity, double ddx, double ddy, double time);
+void updateVelocity(Velocity& velocity, const Acceleration& acceleration,
+                    double time);
 
 /*********************************************************
  * PHYSICS STEP
