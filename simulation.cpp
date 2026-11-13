@@ -11,14 +11,12 @@
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"    // for POINT
-#include "angle.h"
+#include "earth.h"
 #include "satellite.h"
 #include "test.h"
 using namespace std;
 
 const double SIMULATION_SECONDS_PER_FRAME = 48.0;
-const double EARTH_ROTATION_PER_FRAME =
-   -2.0 * Angle::PI * SIMULATION_SECONDS_PER_FRAME / (24.0 * 60.0 * 60.0);
 
 /*************************************************************************
  * Simulation
@@ -29,33 +27,30 @@ class Simulation
 public:
    Simulation(Position ptUpperRight) :
       ptUpperRight(ptUpperRight),
-      satellite()
+      satellite(),
+      earth()
    {
-      angleEarth = 0.0;
       phaseStar = 0;
    }
 
    void update(double time)
    {
       satellite.update(time);
-      angleEarth += EARTH_ROTATION_PER_FRAME;
+      earth.update(time);
       phaseStar++;
    }
 
    void draw(ogstream& gout)
    {
       satellite.draw(gout);
-
-      Position ptEarth;
-      ptEarth.setMeters(0.0, 0.0);
-      gout.drawEarth(ptEarth, angleEarth);
+      earth.draw(gout);
    }
 
 private:
    Position ptUpperRight;
    Satellite satellite;
+   Earth earth;
    unsigned char phaseStar;
-   double angleEarth;
 };
 
 /*************************************

@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="acceleration.cpp" />
+    <ClCompile Include="earth.cpp" />
     <ClCompile Include="satellite.cpp" />
     <ClCompile Include="spaceObject.cpp" />
     <ClCompile Include="simulation.cpp" />
@@ -152,11 +153,13 @@
   <ItemGroup>
     <ClInclude Include="acceleration.h" />
     <ClInclude Include="angle.h" />
+    <ClInclude Include="earth.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="satellite.h" />
     <ClInclude Include="spaceObject.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testAcceleration.h" />
+    <ClInclude Include="testEarth.h" />
     <ClInclude Include="testSatellite.h" />
     <ClInclude Include="testSpaceObject.h" />
     <ClInclude Include="testAngle.h" />
