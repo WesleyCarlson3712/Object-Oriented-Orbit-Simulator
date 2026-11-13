@@ -7,15 +7,12 @@
  *      Simulate satellites orbiting the earth
  *****************************************************************/
 
-#include <cassert>      // for ASSERT
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"    // for POINT
 #include "earth.h"
 #include "satellite.h"
 #include "test.h"
-using namespace std;
-
 const double SIMULATION_SECONDS_PER_FRAME = 48.0;
 
 /*************************************************************************
@@ -25,19 +22,20 @@ const double SIMULATION_SECONDS_PER_FRAME = 48.0;
 class Simulation
 {
 public:
-   Simulation(Position ptUpperRight) :
-      ptUpperRight(ptUpperRight),
-      satellite(),
+   Simulation() :
+      satellite(SatelliteType::GPS,
+                Position(0.0, 42164000.0),
+                Velocity(-3100.0, 0.0),
+                Angle(-Angle::PI / 2.0),
+                0.0),
       earth()
    {
-      phaseStar = 0;
    }
 
    void update(double time)
    {
       satellite.update(time);
       earth.update(time);
-      phaseStar++;
    }
 
    void draw(ogstream& gout)
@@ -47,10 +45,8 @@ public:
    }
 
 private:
-   Position ptUpperRight;
    Satellite satellite;
    Earth earth;
-   unsigned char phaseStar;
 };
 
 /*************************************
@@ -65,6 +61,8 @@ void callBack(const Interface* pUI, void* p)
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Simulation* pSimulation = (Simulation*)p;
+
+   (void)pUI;
 
    //
    // accept input
@@ -115,7 +113,7 @@ int main(int argc, char** argv)
       ptUpperRight);
 
    // Initialize the demo
-   Simulation simulation(ptUpperRight);
+   Simulation simulation;
 
    // set everything into action
    ui.run(callBack, &simulation);

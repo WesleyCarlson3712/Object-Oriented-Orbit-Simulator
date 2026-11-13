@@ -15,12 +15,20 @@ enum class SatelliteType
    STARLINK
 };
 
+/*********************************************
+ * Satellite
+ * A physical satellite that orbits the Earth.
+ *********************************************/
 class Satellite : public SpaceObject
 {
    friend TestSatellite;
 
 public:
-   explicit Satellite(SatelliteType type = SatelliteType::GPS);
+   Satellite(SatelliteType type,
+             const Position& position,
+             const Velocity& velocity,
+             const Angle& orientation,
+             double rotationRate);
 
    void update(double time) override;
    void draw(ogstream& out) override;
