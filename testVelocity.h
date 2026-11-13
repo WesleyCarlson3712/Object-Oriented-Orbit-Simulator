@@ -109,7 +109,8 @@ private:
    void add()
    {
       Velocity velocity(10.0, 20.0);
-      velocity.add(2.0, -4.0, 3.0);
+      Acceleration acceleration(2.0, -4.0);
+      velocity.add(acceleration, 3.0);
       assertEquals(velocity.dx, 16.0);
       assertEquals(velocity.dy, 8.0);
    }

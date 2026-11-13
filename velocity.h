@@ -24,7 +24,6 @@ public:
    void addDY(double dy) { this->dy += dy; }
 
    void add(const Acceleration& acceleration, double time);
-   void add(double ddx, double ddy, double time);
 
 private:
    double dx;
