@@ -148,11 +148,11 @@
     <ClCompile Include="velocity.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="direction.h" />
+    <ClInclude Include="angle.h" />
     <ClInclude Include="physics.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="test.h" />
-    <ClInclude Include="testDirection.h" />
+    <ClInclude Include="testAngle.h" />
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="testVelocity.h" />
     <ClInclude Include="uiDraw.h" />

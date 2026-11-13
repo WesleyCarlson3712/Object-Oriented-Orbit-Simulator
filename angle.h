@@ -2,22 +2,22 @@
 
 #include <cmath>
 
-class TestDirection;
+class TestAngle;
 
 /*********************************************
- * Direction
+ * Angle
  * Represents an angle. Internally, angles are
  * stored in radians.
  *********************************************/
-class Direction
+class Angle
 {
-   friend TestDirection;
+   friend TestAngle;
 
 public:
    static constexpr double PI = 3.14159265358979323846;
 
-   Direction() : radians(0.0) {}
-   explicit Direction(double radians) : radians(radians) {}
+   Angle() : radians(0.0) {}
+   explicit Angle(double radians) : radians(radians) {}
 
    double getRadians() const { return radians; }
    double getDegrees() const { return radians * 180.0 / PI; }

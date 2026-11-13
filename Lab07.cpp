@@ -17,13 +17,13 @@
 #include "position.h"    // for POINT
 #include "velocity.h"
 #include "physics.h"
-#include "direction.h"
+#include "angle.h"
 #include "test.h"
 using namespace std;
 
-const double SIMULATION_SECONDS_PER_FRAME = 148.0;
+const double SIMULATION_SECONDS_PER_FRAME = 48.0;
 const double EARTH_ROTATION_PER_FRAME =
-   -2.0 * Direction::PI * SIMULATION_SECONDS_PER_FRAME / (24.0 * 60.0 * 60.0);
+   -2.0 * Angle::PI * SIMULATION_SECONDS_PER_FRAME / (24.0 * 60.0 * 60.0);
 
 /*************************************************************************
  * Demo
@@ -48,7 +48,7 @@ public:
       ptCrewDragon.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
 
        ptShip.setMeters(0.0, 42164000.0);
-       velocityShip = Velocity(-2100.0, 0.0);
+       velocityShip = Velocity(-3100.0, 0.0);
 
       ptGPS.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
       ptGPS.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
