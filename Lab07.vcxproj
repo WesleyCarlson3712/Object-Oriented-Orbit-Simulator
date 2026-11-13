@@ -143,7 +143,6 @@
     <ClCompile Include="satellite.cpp" />
     <ClCompile Include="spaceObject.cpp" />
     <ClCompile Include="simulation.cpp" />
-    <ClCompile Include="physics.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="uiDraw.cpp" />
@@ -153,7 +152,6 @@
   <ItemGroup>
     <ClInclude Include="acceleration.h" />
     <ClInclude Include="angle.h" />
-    <ClInclude Include="physics.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="satellite.h" />
     <ClInclude Include="spaceObject.h" />
