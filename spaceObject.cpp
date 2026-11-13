@@ -1,6 +1,12 @@
 #include "spaceObject.h"
 
-#include "physics.h"
+#include <cassert>
+#include <cmath>
+
+namespace
+{
+   constexpr double EARTH_GRAVITATIONAL_PARAMETER = 3.986004418e14;
+}
 
 SpaceObject::SpaceObject() :
    position(),
@@ -24,12 +30,17 @@ void SpaceObject::rotate(double delta)
 
 void SpaceObject::updatePosition(const Acceleration& acceleration, double time)
 {
-   ::updatePosition(position, velocity, acceleration, time);
+   const double timeSquared = time * time;
+
+   position.addMetersX(velocity.getDX() * time +
+                       0.5 * acceleration.getDDX() * timeSquared);
+   position.addMetersY(velocity.getDY() * time +
+                       0.5 * acceleration.getDDY() * timeSquared);
 }
 
 void SpaceObject::updateVelocity(const Acceleration& acceleration, double time)
 {
-   ::updateVelocity(velocity, acceleration, time);
+   velocity.add(acceleration, time);
 }
 
 void SpaceObject::updateRotation(double time)
@@ -39,5 +50,14 @@ void SpaceObject::updateRotation(double time)
 
 Acceleration SpaceObject::computeGravity() const
 {
-   return ::computeGravity(position);
+   const double x = position.getMetersX();
+   const double y = position.getMetersY();
+   const double distance = std::sqrt(x * x + y * y);
+
+   assert(distance > 0.0);
+
+   const double gravity = EARTH_GRAVITATIONAL_PARAMETER /
+                          (distance * distance);
+   return Acceleration(gravity * (-x / distance),
+                       gravity * (-y / distance));
 }
