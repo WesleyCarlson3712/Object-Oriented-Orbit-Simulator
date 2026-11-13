@@ -12,6 +12,12 @@ Angle Velocity::getAngle() const
    return angle;
 }
 
+void Velocity::add(const Acceleration& acceleration, double time)
+{
+   dx += acceleration.getDDX() * time;
+   dy += acceleration.getDDY() * time;
+}
+
 void Velocity::add(double ddx, double ddy, double time)
 {
    dx += ddx * time;

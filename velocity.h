@@ -1,5 +1,6 @@
 #pragma once
 #include <cmath>
+#include "acceleration.h"
 #include "angle.h"
 
 class TestVelocity;
@@ -22,6 +23,7 @@ public:
    void addDX(double dx) { this->dx += dx; }
    void addDY(double dy) { this->dy += dy; }
 
+   void add(const Acceleration& acceleration, double time);
    void add(double ddx, double ddy, double time);
 
 private:
