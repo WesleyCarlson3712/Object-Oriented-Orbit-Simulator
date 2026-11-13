@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="acceleration.cpp" />
+    <ClCompile Include="spaceObject.cpp" />
     <ClCompile Include="simulation.cpp" />
     <ClCompile Include="physics.cpp" />
     <ClCompile Include="position.cpp" />
@@ -153,8 +154,10 @@
     <ClInclude Include="angle.h" />
     <ClInclude Include="physics.h" />
     <ClInclude Include="position.h" />
+    <ClInclude Include="spaceObject.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testAcceleration.h" />
+    <ClInclude Include="testSpaceObject.h" />
     <ClInclude Include="testAngle.h" />
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="testVelocity.h" />
