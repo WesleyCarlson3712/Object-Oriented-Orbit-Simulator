@@ -5,10 +5,6 @@
  *      Lab 07: Orbit Simulator
  * 3. Assignment Description:
  *      Simulate satellites orbiting the earth
- * 4. What was the hardest part? Be as specific as possible.
- *      ??
- * 5. How long did it take for you to complete the assignment?
- *      ??
  *****************************************************************/
 
 #include <cassert>      // for ASSERT
@@ -26,55 +22,45 @@ const double EARTH_ROTATION_PER_FRAME =
    -2.0 * Angle::PI * SIMULATION_SECONDS_PER_FRAME / (24.0 * 60.0 * 60.0);
 
 /*************************************************************************
- * Demo
- * Test structure to capture the LM that will move around the screen
+ * Simulation
+ * Everything pertaining to the orbit simulation.
  *************************************************************************/
-class Demo
+class Simulation
 {
 public:
-   Demo(Position ptUpperRight) :
+   Simulation(Position ptUpperRight) :
       ptUpperRight(ptUpperRight)
    {
-      ptHubble.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptHubble.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
-      ptSputnik.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptSputnik.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
-      ptStarlink.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptStarlink.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
-      ptCrewDragon.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptCrewDragon.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
-       ptShip.setMeters(0.0, 42164000.0);
-       velocityShip = Velocity(-3100.0, 0.0);
-
-      ptGPS.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptGPS.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
-      ptStar.setPixelsX(ptUpperRight.getPixelsX() * random(-0.5, 0.5));
-      ptStar.setPixelsY(ptUpperRight.getPixelsY() * random(-0.5, 0.5));
-
-      angleShip = 0.0;
+      ptGPS.setMeters(0.0, 42164000.0);
+      velocityGPS = Velocity(-3100.0, 0.0);
+      angleGPS = 0.0;
       angleEarth = 0.0;
       phaseStar = 0;
    }
 
-   Position ptHubble;
-   Position ptSputnik;
-   Position ptStarlink;
-   Position ptCrewDragon;
-   Position ptShip;
-   Position ptGPS;
-   Position ptStar;
+   void update(double time)
+   {
+      physicsStep(ptGPS, velocityGPS, time);
+      angleEarth += EARTH_ROTATION_PER_FRAME;
+      phaseStar++;
+   }
+
+   void draw(ogstream& gout) const
+   {
+      gout.drawGPS(ptGPS, angleGPS);
+
+      Position ptEarth;
+      ptEarth.setMeters(0.0, 0.0);
+      gout.drawEarth(ptEarth, angleEarth);
+   }
+
+private:
    Position ptUpperRight;
-
+   Position ptGPS;
+   Velocity velocityGPS;
    unsigned char phaseStar;
-
-   double angleShip;
+   double angleGPS;
    double angleEarth;
-   Velocity velocityShip;
 };
 
 /*************************************
@@ -88,7 +74,7 @@ void callBack(const Interface* pUI, void* p)
 {
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
-   Demo* pDemo = (Demo*)p;
+   Simulation* pSimulation = (Simulation*)p;
 
    //
    // accept input
@@ -98,12 +84,7 @@ void callBack(const Interface* pUI, void* p)
    // perform all the game logic
    //
 
-   physicsStep(pDemo->ptShip, pDemo->velocityShip,
-               SIMULATION_SECONDS_PER_FRAME);
-
-   // rotate the earth
-   pDemo->angleEarth += EARTH_ROTATION_PER_FRAME;
-   pDemo->phaseStar++;
+   pSimulation->update(SIMULATION_SECONDS_PER_FRAME);
 
    //
    // draw everything
@@ -112,12 +93,7 @@ void callBack(const Interface* pUI, void* p)
    Position pt;
    ogstream gout(pt);
 
-    // draw the geostationary satellite
-    gout.drawGPS       (pDemo->ptShip,       pDemo->angleShip);
-
-   // draw the earth
-   pt.setMeters(0.0, 0.0);
-   gout.drawEarth(pt, pDemo->angleEarth);
+   pSimulation->draw(gout);
 }
 
 double Position::metersFromPixels = 40.0;
@@ -149,10 +125,10 @@ int main(int argc, char** argv)
       ptUpperRight);
 
    // Initialize the demo
-   Demo demo(ptUpperRight);
+   Simulation simulation(ptUpperRight);
 
    // set everything into action
-   ui.run(callBack, &demo);
+   ui.run(callBack, &simulation);
 
 
    return 0;
