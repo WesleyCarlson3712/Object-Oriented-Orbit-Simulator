@@ -11,9 +11,8 @@
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
 #include "position.h"    // for POINT
-#include "velocity.h"
-#include "physics.h"
 #include "angle.h"
+#include "satellite.h"
 #include "test.h"
 using namespace std;
 
@@ -29,25 +28,23 @@ class Simulation
 {
 public:
    Simulation(Position ptUpperRight) :
-      ptUpperRight(ptUpperRight)
+      ptUpperRight(ptUpperRight),
+      satellite()
    {
-      ptGPS.setMeters(0.0, 42164000.0);
-      velocityGPS = Velocity(-3100.0, 0.0);
-      angleGPS = 0.0;
       angleEarth = 0.0;
       phaseStar = 0;
    }
 
    void update(double time)
    {
-      physicsStep(ptGPS, velocityGPS, time);
+      satellite.update(time);
       angleEarth += EARTH_ROTATION_PER_FRAME;
       phaseStar++;
    }
 
-   void draw(ogstream& gout) const
+   void draw(ogstream& gout)
    {
-      gout.drawGPS(ptGPS, angleGPS);
+      satellite.draw(gout);
 
       Position ptEarth;
       ptEarth.setMeters(0.0, 0.0);
@@ -56,10 +53,8 @@ public:
 
 private:
    Position ptUpperRight;
-   Position ptGPS;
-   Velocity velocityGPS;
+   Satellite satellite;
    unsigned char phaseStar;
-   double angleGPS;
    double angleEarth;
 };
 

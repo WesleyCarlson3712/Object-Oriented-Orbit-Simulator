@@ -140,8 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="acceleration.cpp" />
+    <ClCompile Include="satellite.cpp" />
+    <ClCompile Include="spaceObject.cpp" />
     <ClCompile Include="simulation.cpp" />
-    <ClCompile Include="physics.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="uiDraw.cpp" />
@@ -151,10 +152,13 @@
   <ItemGroup>
     <ClInclude Include="acceleration.h" />
     <ClInclude Include="angle.h" />
-    <ClInclude Include="physics.h" />
     <ClInclude Include="position.h" />
+    <ClInclude Include="satellite.h" />
+    <ClInclude Include="spaceObject.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testAcceleration.h" />
+    <ClInclude Include="testSatellite.h" />
+    <ClInclude Include="testSpaceObject.h" />
     <ClInclude Include="testAngle.h" />
     <ClInclude Include="testPosition.h" />
     <ClInclude Include="testVelocity.h" />
@@ -164,6 +168,7 @@
     <ClInclude Include="velocity.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".github\copilot-instructions.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
