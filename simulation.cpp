@@ -27,7 +27,7 @@ public:
                 Position(0.0, 42164000.0),
                 Velocity(-3100.0, 0.0),
                 Angle(-Angle::PI / 2.0),
-                0.0),
+                -0.000072),
       earth()
    {
    }
