@@ -8,6 +8,15 @@
 class TestSatellite : public Satellite, public UnitTest
 {
 public:
+   TestSatellite() :
+      Satellite(SatelliteType::GPS,
+                Position(0.0, 42164000.0),
+                Velocity(-3100.0, 0.0),
+                Angle(-Angle::PI / 2.0),
+                0.0)
+   {
+   }
+
    void run()
    {
       construct_default();
@@ -21,7 +30,12 @@ public:
 private:
    void construct_default()
    {
-      Satellite satellite;
+      Satellite satellite(
+         SatelliteType::GPS,
+         Position(0.0, 42164000.0),
+         Velocity(-3100.0, 0.0),
+         Angle(-Angle::PI / 2.0),
+         0.0);
 
       assertUnit(satellite.type == SatelliteType::GPS);
       assertUnit(!satellite.defunct);
@@ -29,11 +43,17 @@ private:
       assertEquals(satellite.position.getMetersY(), 42164000.0);
       assertEquals(satellite.velocity.getDX(), -3100.0);
       assertEquals(satellite.velocity.getDY(), 0.0);
+      assertEquals(satellite.orientation.getRadians(), -Angle::PI / 2.0);
    }
 
    void update()
    {
-      Satellite satellite;
+      Satellite satellite(
+         SatelliteType::GPS,
+         Position(0.0, 42164000.0),
+         Velocity(-3100.0, 0.0),
+         Angle(-Angle::PI / 2.0),
+         0.0);
 
       const double earthGravitationalParameter = 3.986004418e14;
       const double initialRadius = 42164000.0;
@@ -66,11 +86,19 @@ private:
          satellite.velocity.getDY(),
          expectedDY,
          0.0001);
+      assertEquals(
+         satellite.orientation.getRadians(),
+         -Angle::PI / 2.0);
    }
 
    void makeDefunct()
    {
-      Satellite satellite;
+      Satellite satellite(
+         SatelliteType::GPS,
+         Position(0.0, 42164000.0),
+         Velocity(-3100.0, 0.0),
+         Angle(-Angle::PI / 2.0),
+         0.0);
 
       satellite.makeDefunct();
 
@@ -80,7 +108,12 @@ private:
 
    void testBreakApart()
    {
-      Satellite satellite;
+      Satellite satellite(
+         SatelliteType::GPS,
+         Position(0.0, 42164000.0),
+         Velocity(-3100.0, 0.0),
+         Angle(-Angle::PI / 2.0),
+         0.0);
 
       std::vector<SpaceObject*> parts = satellite.breakApart();
 

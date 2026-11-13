@@ -14,6 +14,7 @@
 #include "testAcceleration.h"
 #include "testSpaceObject.h"
 #include "testSatellite.h"
+#include "testEarth.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -40,4 +41,5 @@ void testRunner()
    TestAcceleration().run();
    TestSpaceObject().run();
    TestSatellite().run();
+   TestEarth().run();
 }
