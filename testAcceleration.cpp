@@ -2,7 +2,7 @@
  * Source File:
  *    Test Acceleration : Test the Acceleration class
  * Author:
- *    Jon, Copilot / Antigravity
+ *    Wesley Carlson
  * Summary:
  *    All the unit tests for Acceleration
  ************************************************************************/
@@ -16,9 +16,12 @@ void TestAcceleration::run()
    getDDX();
    getDDY();
    getMagnitude();
+   getMagnitude_zero();
+   getMagnitude_negative();
    setDDX();
    setDDY();
    add();
+   add_cancelling();
 
    report("Acceleration");
 }
@@ -55,6 +58,18 @@ void TestAcceleration::getMagnitude()
    assertEquals(acceleration.getMagnitude(), 5.0);
 }
 
+void TestAcceleration::getMagnitude_zero()
+{
+   Acceleration acceleration(0.0, 0.0);
+   assertEquals(acceleration.getMagnitude(), 0.0);
+}
+
+void TestAcceleration::getMagnitude_negative()
+{
+   Acceleration acceleration(-6.0, -8.0);
+   assertEquals(acceleration.getMagnitude(), 10.0);
+}
+
 void TestAcceleration::setDDX()
 {
    Acceleration acceleration(3.0, 4.0);
@@ -78,4 +93,13 @@ void TestAcceleration::add()
    acceleration.add(rhs);
    assertEquals(acceleration.ddx, 5.0);
    assertEquals(acceleration.ddy, 3.0);
+}
+
+void TestAcceleration::add_cancelling()
+{
+   Acceleration acceleration(7.5, -4.2);
+   Acceleration opposite(-7.5, 4.2);
+   acceleration.add(opposite);
+   assertEqualsTolerance(acceleration.ddx, 0.0, 0.00001);
+   assertEqualsTolerance(acceleration.ddy, 0.0, 0.00001);
 }

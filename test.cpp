@@ -42,4 +42,6 @@ void testRunner()
    TestSpaceObject().run();
    TestSatellite().run();
    TestEarth().run();
+
+   std::cout << std::flush;
 }

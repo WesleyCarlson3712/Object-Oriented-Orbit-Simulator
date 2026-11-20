@@ -2,7 +2,7 @@
  * Source File:
  *    Test Velocity : Test the Velocity class
  * Author:
- *    Jon, Copilot / Antigravity
+ *    Wesley Carlson
  * Summary:
  *    All the unit tests for Velocity
  ************************************************************************/
@@ -17,12 +17,16 @@ void TestVelocity::run()
    getDX();
    getDY();
    getSpeed();
+   getSpeed_zero();
+   getSpeed_negative();
    getAngle();
    setDX();
    setDY();
    addDX();
    addDY();
    add();
+   add_zeroAcceleration();
+   add_negative();
    addAcceleration();
 
    report("Velocity");
@@ -63,6 +67,18 @@ void TestVelocity::getDY()
 void TestVelocity::getSpeed()
 {
    Velocity velocity(3.0, 4.0);
+   assertEquals(velocity.getSpeed(), 5.0);
+}
+
+void TestVelocity::getSpeed_zero()
+{
+   Velocity velocity(0.0, 0.0);
+   assertEquals(velocity.getSpeed(), 0.0);
+}
+
+void TestVelocity::getSpeed_negative()
+{
+   Velocity velocity(-3.0, -4.0);
    assertEquals(velocity.getSpeed(), 5.0);
 }
 
@@ -113,11 +129,40 @@ void TestVelocity::add()
    assertEquals(velocity.dy, 8.0);
 }
 
+/*********************************************************
+ * ADD : ZERO ACCELERATION (INERTIA)
+ * Velocity should remain unaffected when acceleration is 0.
+ *********************************************************/
+void TestVelocity::add_zeroAcceleration()
+{
+   Velocity velocity(12.0, -24.0);
+   Acceleration zeroAccel(0.0, 0.0);
+   velocity.add(zeroAccel, 10.0);
+
+   assertEquals(velocity.dx, 12.0);
+   assertEquals(velocity.dy, -24.0);
+}
+
+/*********************************************************
+ * ADD : NEGATIVE ACCELERATION (DECELERATION)
+ *********************************************************/
+void TestVelocity::add_negative()
+{
+   Velocity velocity(20.0, 30.0);
+   Acceleration decel(-5.0, -10.0);
+   velocity.add(decel, 2.0);
+
+   assertEquals(velocity.dx, 10.0);
+   assertEquals(velocity.dy, 10.0);
+}
+
 void TestVelocity::addAcceleration()
 {
    Velocity velocity(10.0, 20.0);
    Acceleration acceleration(2.0, -4.0);
+
    velocity.add(acceleration, 3.0);
+
    assertEquals(velocity.dx, 16.0);
    assertEquals(velocity.dy, 8.0);
 }
