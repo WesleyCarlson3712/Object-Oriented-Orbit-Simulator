@@ -1,18 +1,33 @@
+/***********************************************************************
+ * Source File:
+ *    Satellite : Abstract base class for satellites orbiting the Earth
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Implementation of common satellite physics and behaviors.
+ ************************************************************************/
+
 #include "satellite.h"
 
-#include "uiDraw.h"
+/*********************************************
+ * Satellite : DEFAULT CONSTRUCTOR
+ *********************************************/
+Satellite::Satellite() :
+   SpaceObject(),
+   defunct(false),
+   uncontrolledRotationRate(0.0)
+{
+}
 
 /*********************************************
- * Satellite : CONSTRUCTOR
- * Initialize a satellite with its type and physical state.
+ * Satellite : NON-DEFAULT CONSTRUCTOR
+ * Initialize a satellite with its physical state.
  *********************************************/
-Satellite::Satellite(SatelliteType type,
-                     const Position& position,
+Satellite::Satellite(const Position& position,
                      const Velocity& velocity,
                      const Angle& orientation,
                      double rotationRate) :
    SpaceObject(),
-   type(type),
    defunct(false),
    uncontrolledRotationRate(0.0)
 {
@@ -36,45 +51,6 @@ void Satellite::update(double time)
    updatePosition(acceleration, time);
    updateVelocity(acceleration, time);
    updateRotation(time);
-}
-
-/*********************************************
- * Satellite : DRAW
- * Draw the satellite according to its type.
- *********************************************/
-void Satellite::draw(ogstream& out)
-{
-   switch (type)
-   {
-   case SatelliteType::SPUTNIK:
-      out.drawSputnik(position, orientation.getRadians());
-      break;
-
-   case SatelliteType::GPS:
-      out.drawGPS(position, orientation.getRadians());
-      break;
-
-   case SatelliteType::HUBBLE:
-      out.drawHubble(position, orientation.getRadians());
-      break;
-
-   case SatelliteType::CREW_DRAGON:
-      out.drawCrewDragon(position, orientation.getRadians());
-      break;
-
-   case SatelliteType::STARLINK:
-      out.drawStarlink(position, orientation.getRadians());
-      break;
-   }
-}
-
-/*********************************************
- * Satellite : BREAK APART
- * Return the objects created when the satellite breaks apart.
- *********************************************/
-std::vector<SpaceObject*> Satellite::breakApart()
-{
-   return {};
 }
 
 /*********************************************
