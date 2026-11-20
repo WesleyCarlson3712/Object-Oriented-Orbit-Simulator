@@ -19,12 +19,41 @@ const double SIMULATION_SECONDS_PER_FRAME = 48.0;
  * Simulation
  * Everything pertaining to the orbit simulation.
  *************************************************************************/
+/*************************************************************************
+ * SatelliteStub
+ * Temporary concrete satellite for simulation until GPS subclass is added.
+ *************************************************************************/
+class SatelliteStub : public Satellite
+{
+public:
+   SatelliteStub(const Position& position,
+                 const Velocity& velocity,
+                 const Angle& orientation,
+                 double rotationRate) :
+      Satellite(position, velocity, orientation, rotationRate)
+   {
+   }
+
+   void draw(ogstream& out) override
+   {
+      out.drawGPS(position, orientation.getRadians());
+   }
+
+   std::vector<SpaceObject*> breakApart() override
+   {
+      return {};
+   }
+};
+
+/*************************************************************************
+ * Simulation
+ * Everything pertaining to the orbit simulation.
+ *************************************************************************/
 class Simulation
 {
 public:
    Simulation() :
-      satellite(SatelliteType::GPS,
-                Position(0.0, 42164000.0),
+      satellite(Position(0.0, 42164000.0),
                 Velocity(-3100.0, 0.0),
                 Angle(-Angle::PI / 2.0),
                 -0.000072),
@@ -45,7 +74,7 @@ public:
    }
 
 private:
-   Satellite satellite;
+   SatelliteStub satellite;
    Earth earth;
 };
 
