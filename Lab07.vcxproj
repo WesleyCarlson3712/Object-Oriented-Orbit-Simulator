@@ -147,6 +147,13 @@
     <ClCompile Include="simulation.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="testAcceleration.cpp" />
+    <ClCompile Include="testAngle.cpp" />
+    <ClCompile Include="testEarth.cpp" />
+    <ClCompile Include="testPosition.cpp" />
+    <ClCompile Include="testSatellite.cpp" />
+    <ClCompile Include="testSpaceObject.cpp" />
+    <ClCompile Include="testVelocity.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
     <ClCompile Include="velocity.cpp" />
