@@ -2,7 +2,7 @@
  * Source File:
  *    Test Angle : Test the Angle class
  * Author:
- *    Jon, Copilot / Antigravity
+ *    Wesley Carlson
  * Summary:
  *    All the unit tests for Angle
  ************************************************************************/

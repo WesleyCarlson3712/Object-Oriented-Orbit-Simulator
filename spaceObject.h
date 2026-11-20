@@ -10,6 +10,7 @@
 class ogstream;
 class TestSpaceObject;
 class TestSatellite;
+class TestShip;
 
 /*********************************************
  * SpaceObject
@@ -19,6 +20,7 @@ class SpaceObject
 {
    friend TestSpaceObject;
    friend TestSatellite;
+   friend TestShip;
 
 public:
    /*********************************************

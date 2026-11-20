@@ -13,6 +13,7 @@
 #include "earth.h"
 #include "satellite.h"
 #include "gps.h"
+#include "ship.h"
 #include "test.h"
 
 const double SIMULATION_SECONDS_PER_FRAME = 48.0;
@@ -25,6 +26,9 @@ class Simulation
 {
 public:
    Simulation() :
+      ship(Position(-42164000.0, 0.0),
+           Velocity(0.0, 3100.0),
+           Angle(Angle::PI / 2.0)),
       satellite(Position(0.0, 42164000.0),
                 Velocity(-3100.0, 0.0),
                 Angle(-Angle::PI / 2.0),
@@ -33,19 +37,45 @@ public:
    {
    }
 
+   /**********************************************************************
+    * HANDLE INPUT
+    * Read user keyboard inputs and adjust ship orientation and thrust.
+    **********************************************************************/
+   void handleInput(const Interface* pUI)
+   {
+      if (!pUI)
+         return;
+
+      // Turning controls
+      if (pUI->isLeft())
+         ship.turn(-0.1);
+      if (pUI->isRight())
+         ship.turn(0.1);
+
+      // Main thruster activation
+      ship.setThrust(pUI->isUp() || pUI->isDown());
+
+      // Fire weapon (stub)
+      if (pUI->isSpace())
+         ship.fire();
+   }
+
    void update(double time)
    {
+      ship.update(time);
       satellite.update(time);
       earth.update(time);
    }
 
    void draw(ogstream& gout)
    {
+      ship.draw(gout);
       satellite.draw(gout);
       earth.draw(gout);
    }
 
 private:
+   Ship ship;
    GPS satellite;
    Earth earth;
 };
@@ -60,11 +90,11 @@ private:
 void callBack(const Interface* pUI, void* p)
 {
    Simulation* pSimulation = (Simulation*)p;
-   (void)pUI;
 
    //
    // accept input
    //
+   pSimulation->handleInput(pUI);
 
    //
    // perform all the game logic

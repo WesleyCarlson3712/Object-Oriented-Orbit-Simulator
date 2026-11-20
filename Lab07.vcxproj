@@ -146,6 +146,7 @@
     <ClCompile Include="gps.cpp" />
     <ClCompile Include="hubble.cpp" />
     <ClCompile Include="satellite.cpp" />
+    <ClCompile Include="ship.cpp" />
     <ClCompile Include="spaceObject.cpp" />
     <ClCompile Include="simulation.cpp" />
     <ClCompile Include="position.cpp" />
@@ -157,8 +158,11 @@
     <ClCompile Include="testEarth.cpp" />
     <ClCompile Include="testPosition.cpp" />
     <ClCompile Include="testSatellite.cpp" />
+    <ClCompile Include="testShip.cpp" />
     <ClCompile Include="testSpaceObject.cpp" />
+    <ClCompile Include="testThrust.cpp" />
     <ClCompile Include="testVelocity.cpp" />
+    <ClCompile Include="thrust.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
     <ClCompile Include="velocity.cpp" />
@@ -172,6 +176,7 @@
     <ClInclude Include="hubble.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="satellite.h" />
+    <ClInclude Include="ship.h" />
     <ClInclude Include="spaceObject.h" />
     <ClInclude Include="sputnik.h" />
     <ClInclude Include="starlink.h" />
@@ -179,10 +184,13 @@
     <ClInclude Include="testAcceleration.h" />
     <ClInclude Include="testEarth.h" />
     <ClInclude Include="testSatellite.h" />
+    <ClInclude Include="testShip.h" />
     <ClInclude Include="testSpaceObject.h" />
     <ClInclude Include="testAngle.h" />
     <ClInclude Include="testPosition.h" />
+    <ClInclude Include="testThrust.h" />
     <ClInclude Include="testVelocity.h" />
+    <ClInclude Include="thrust.h" />
     <ClInclude Include="uiDraw.h" />
     <ClInclude Include="uiInteract.h" />
     <ClInclude Include="unitTest.h" />

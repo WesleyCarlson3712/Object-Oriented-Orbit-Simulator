@@ -15,6 +15,8 @@
 #include "testSpaceObject.h"
 #include "testSatellite.h"
 #include "testEarth.h"
+#include "testThrust.h"
+#include "testShip.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -42,6 +44,8 @@ void testRunner()
    TestSpaceObject().run();
    TestSatellite().run();
    TestEarth().run();
+   TestThrust().run();
+   TestShip().run();
 
    std::cout << std::flush;
 }
