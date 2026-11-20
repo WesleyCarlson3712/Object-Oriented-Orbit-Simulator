@@ -20,22 +20,15 @@ public:
    explicit Angle(double radians) : radians(radians) {}
 
    double getRadians() const { return radians; }
-   double getDegrees() const { return radians * 180.0 / PI; }
-   double getDx() const { return std::cos(radians); }
-   double getDy() const { return std::sin(radians); }
+   double getDegrees() const;
+   double getDx() const;
+   double getDy() const;
 
    void setRadians(double radians) { this->radians = radians; }
-   void setDegrees(double degrees)
-   {
-      radians = degrees * PI / 180.0;
-   }
-   void setDxDy(double dx, double dy) { radians = std::atan2(dy, dx); }
+   void setDegrees(double degrees);
+   void setDxDy(double dx, double dy);
 
-   Angle& add(double delta)
-   {
-      radians += delta;
-      return *this;
-   }
+   Angle& add(double delta);
 
 private:
    double radians;

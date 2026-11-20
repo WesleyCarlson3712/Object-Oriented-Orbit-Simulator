@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="acceleration.cpp" />
+    <ClCompile Include="angle.cpp" />
     <ClCompile Include="earth.cpp" />
     <ClCompile Include="satellite.cpp" />
     <ClCompile Include="spaceObject.cpp" />
