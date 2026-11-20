@@ -208,6 +208,10 @@ void TestSatellite::testGPS()
    fake.str("");
 
    assertUnit(gps.breakApart().empty());
+
+   // Verify GPS updates orientation to face Earth
+   gps.update(1.0);
+   assertEqualsTolerance(gps.getOrientation().getRadians(), Angle::PI / 2.0, 0.01);
 }
 
 /*********************************************************

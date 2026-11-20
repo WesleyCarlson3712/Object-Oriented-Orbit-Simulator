@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Header File:
+ *    SpaceObject : Base class for physical objects in orbit
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Base class for all physical entities orbiting Earth.
+ ************************************************************************/
+
 #pragma once
 
 #include <vector>

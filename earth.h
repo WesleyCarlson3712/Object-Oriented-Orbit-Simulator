@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Header File:
+ *    Earth : Represents the Earth
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Represents the Earth at the center of the orbit simulation.
+ ************************************************************************/
+
 #pragma once
 
 #include "angle.h"

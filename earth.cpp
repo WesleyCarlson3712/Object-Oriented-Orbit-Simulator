@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Source File:
+ *    Earth : Represents the Earth
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Implementation of Earth rotation and drawing.
+ ************************************************************************/
+
 #include "earth.h"
 
 #include "uiDraw.h"

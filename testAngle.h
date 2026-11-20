@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Header File:
+ *    Test Angle : Test the Angle class
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Declarations of unit tests for Angle.
+ ************************************************************************/
+
 #pragma once
 
 #include "angle.h"
