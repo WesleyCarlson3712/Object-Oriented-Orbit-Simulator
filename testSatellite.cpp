@@ -1,6 +1,6 @@
 /***********************************************************************
  * Source File:
- *    Test Satellite : Test the Satellite class
+ *    Test Satellite : Test the Satellite class and its subclasses
  * Author:
  *    Wesley Carlson
  * Summary:
@@ -9,6 +9,11 @@
 
 #include "testSatellite.h"
 #include "uiDraw.h"
+#include "sputnik.h"
+#include "gps.h"
+#include "hubble.h"
+#include "crewDragon.h"
+#include "starlink.h"
 #include <cmath>
 
 TestSatellite::TestSatellite() :
@@ -45,6 +50,13 @@ void TestSatellite::run()
    testMakeDefunct();
    testBreakApart();
    testDraw();
+
+   // Polymorphic satellite subtype tests
+   testSputnik();
+   testGPS();
+   testHubble();
+   testCrewDragon();
+   testStarlink();
 
    report("Satellite");
 }
@@ -158,4 +170,93 @@ void TestSatellite::testDraw()
    fake.str("");
 
    assertUnit(true);
+}
+
+/*********************************************************
+ * SUBCLASS TEST : SPUTNIK
+ *********************************************************/
+void TestSatellite::testSputnik()
+{
+   Sputnik sputnik;
+   assertUnit(sputnik.isAlive());
+   assertEquals(sputnik.getRadius(), 4.0);
+
+   Position pt;
+   ogstreamFake fake(pt);
+   sputnik.draw(fake);
+   fake.str("");
+
+   assertUnit(sputnik.breakApart().empty());
+}
+
+/*********************************************************
+ * SUBCLASS TEST : GPS
+ *********************************************************/
+void TestSatellite::testGPS()
+{
+   GPS gps;
+   assertUnit(gps.isAlive());
+   assertEquals(gps.getRadius(), 12.0);
+   assertEquals(gps.getPosition().getMetersX(), 0.0);
+   assertEquals(gps.getPosition().getMetersY(), 42164000.0);
+   assertEquals(gps.getVelocity().getDX(), -3100.0);
+   assertEquals(gps.getVelocity().getDY(), 0.0);
+
+   Position pt;
+   ogstreamFake fake(pt);
+   gps.draw(fake);
+   fake.str("");
+
+   assertUnit(gps.breakApart().empty());
+}
+
+/*********************************************************
+ * SUBCLASS TEST : HUBBLE
+ *********************************************************/
+void TestSatellite::testHubble()
+{
+   Hubble hubble;
+   assertUnit(hubble.isAlive());
+   assertEquals(hubble.getRadius(), 10.0);
+
+   Position pt;
+   ogstreamFake fake(pt);
+   hubble.draw(fake);
+   fake.str("");
+
+   assertUnit(hubble.breakApart().empty());
+}
+
+/*********************************************************
+ * SUBCLASS TEST : CREW DRAGON
+ *********************************************************/
+void TestSatellite::testCrewDragon()
+{
+   CrewDragon dragon;
+   assertUnit(dragon.isAlive());
+   assertEquals(dragon.getRadius(), 7.0);
+
+   Position pt;
+   ogstreamFake fake(pt);
+   dragon.draw(fake);
+   fake.str("");
+
+   assertUnit(dragon.breakApart().empty());
+}
+
+/*********************************************************
+ * SUBCLASS TEST : STARLINK
+ *********************************************************/
+void TestSatellite::testStarlink()
+{
+   Starlink starlink;
+   assertUnit(starlink.isAlive());
+   assertEquals(starlink.getRadius(), 6.0);
+
+   Position pt;
+   ogstreamFake fake(pt);
+   starlink.draw(fake);
+   fake.str("");
+
+   assertUnit(starlink.breakApart().empty());
 }

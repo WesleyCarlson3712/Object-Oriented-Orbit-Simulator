@@ -1,6 +1,6 @@
 /*************************************************************
  * 1. Name:
- *      Demo
+ *      Wesley Carlson
  * 2. Assignment Name:
  *      Lab 07: Orbit Simulator
  * 3. Assignment Description:
@@ -9,41 +9,13 @@
 
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
-#include "position.h"    // for POINT
+#include "position.h"   // for POINT
 #include "earth.h"
 #include "satellite.h"
+#include "gps.h"
 #include "test.h"
+
 const double SIMULATION_SECONDS_PER_FRAME = 48.0;
-
-/*************************************************************************
- * Simulation
- * Everything pertaining to the orbit simulation.
- *************************************************************************/
-/*************************************************************************
- * SatelliteStub
- * Temporary concrete satellite for simulation until GPS subclass is added.
- *************************************************************************/
-class SatelliteStub : public Satellite
-{
-public:
-   SatelliteStub(const Position& position,
-                 const Velocity& velocity,
-                 const Angle& orientation,
-                 double rotationRate) :
-      Satellite(position, velocity, orientation, rotationRate)
-   {
-   }
-
-   void draw(ogstream& out) override
-   {
-      out.drawGPS(position, orientation.getRadians());
-   }
-
-   std::vector<SpaceObject*> breakApart() override
-   {
-      return {};
-   }
-};
 
 /*************************************************************************
  * Simulation
@@ -74,7 +46,7 @@ public:
    }
 
 private:
-   SatelliteStub satellite;
+   GPS satellite;
    Earth earth;
 };
 
@@ -87,10 +59,7 @@ private:
  **************************************/
 void callBack(const Interface* pUI, void* p)
 {
-   // the first step is to cast the void pointer into a game object. This
-   // is the first step of every single callback function in OpenGL. 
    Simulation* pSimulation = (Simulation*)p;
-
    (void)pUI;
 
    //
@@ -100,13 +69,11 @@ void callBack(const Interface* pUI, void* p)
    //
    // perform all the game logic
    //
-
    pSimulation->update(SIMULATION_SECONDS_PER_FRAME);
 
    //
    // draw everything
    //
-
    Position pt;
    ogstream gout(pt);
 
@@ -129,7 +96,6 @@ int WINAPI wWinMain(
 int main(int argc, char** argv)
 #endif // !_WIN32
 {
-
    testRunner();
 
    // Initialize OpenGL
@@ -138,7 +104,7 @@ int main(int argc, char** argv)
    ptUpperRight.setPixelsX(1000.0);
    ptUpperRight.setPixelsY(1000.0);
    Interface ui(0, NULL,
-      "Demo",   /* name on the window */
+      "Orbit Simulator",   /* name on the window */
       ptUpperRight);
 
    // Initialize the demo
@@ -146,7 +112,6 @@ int main(int argc, char** argv)
 
    // set everything into action
    ui.run(callBack, &simulation);
-
 
    return 0;
 }

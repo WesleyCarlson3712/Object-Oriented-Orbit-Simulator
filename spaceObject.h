@@ -8,6 +8,8 @@
 #include "velocity.h"
 
 class ogstream;
+class TestSpaceObject;
+class TestSatellite;
 
 /*********************************************
  * SpaceObject
@@ -15,6 +17,9 @@ class ogstream;
  *********************************************/
 class SpaceObject
 {
+   friend TestSpaceObject;
+   friend TestSatellite;
+
 public:
    /*********************************************
     * DESTRUCTOR
@@ -69,6 +74,13 @@ public:
     * Return the object's current orientation.
     *********************************************/
    Angle getOrientation() const { return orientation; }
+
+   /*********************************************
+    * GETTERS
+    *********************************************/
+   double getRadius() const { return radius; }
+   const Position& getPosition() const { return position; }
+   const Velocity& getVelocity() const { return velocity; }
 
 protected:
    SpaceObject();

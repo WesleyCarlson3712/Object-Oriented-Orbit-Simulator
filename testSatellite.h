@@ -1,6 +1,6 @@
 /***********************************************************************
  * Header File:
- *    Test Satellite : Test the Satellite class
+ *    Test Satellite : Test the Satellite class and its subclasses
  * Author:
  *    Wesley Carlson
  * Summary:
@@ -37,4 +37,11 @@ private:
    void testMakeDefunct();
    void testBreakApart();
    void testDraw();
+
+   // Subclass tests
+   void testSputnik();
+   void testGPS();
+   void testHubble();
+   void testCrewDragon();
+   void testStarlink();
 };

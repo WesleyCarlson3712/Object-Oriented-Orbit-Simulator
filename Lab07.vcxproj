@@ -141,11 +141,16 @@
   <ItemGroup>
     <ClCompile Include="acceleration.cpp" />
     <ClCompile Include="angle.cpp" />
+    <ClCompile Include="crewDragon.cpp" />
     <ClCompile Include="earth.cpp" />
+    <ClCompile Include="gps.cpp" />
+    <ClCompile Include="hubble.cpp" />
     <ClCompile Include="satellite.cpp" />
     <ClCompile Include="spaceObject.cpp" />
     <ClCompile Include="simulation.cpp" />
     <ClCompile Include="position.cpp" />
+    <ClCompile Include="sputnik.cpp" />
+    <ClCompile Include="starlink.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="testAcceleration.cpp" />
     <ClCompile Include="testAngle.cpp" />
@@ -162,9 +167,14 @@
     <ClInclude Include="acceleration.h" />
     <ClInclude Include="angle.h" />
     <ClInclude Include="earth.h" />
+    <ClInclude Include="gps.h" />
+    <ClInclude Include="crewDragon.h" />
+    <ClInclude Include="hubble.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="satellite.h" />
     <ClInclude Include="spaceObject.h" />
+    <ClInclude Include="sputnik.h" />
+    <ClInclude Include="starlink.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testAcceleration.h" />
     <ClInclude Include="testEarth.h" />
