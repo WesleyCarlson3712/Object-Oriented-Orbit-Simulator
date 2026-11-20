@@ -24,6 +24,7 @@ public:
       const Angle& orientation = Angle(),
       double rotationRate = 0.0);
 
+   void update(double time) override;
    void draw(ogstream& out) override;
    std::vector<SpaceObject*> breakApart() override;
 };

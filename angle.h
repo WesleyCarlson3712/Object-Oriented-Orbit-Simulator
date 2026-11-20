@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Header File:
+ *    Angle : Represents an angle
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Represents an angle in radians with degree and component conversions.
+ ************************************************************************/
+
 #pragma once
 
 #include <cmath>

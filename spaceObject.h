@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Header File:
+ *    SpaceObject : Base class for physical objects in orbit
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Base class for all physical entities orbiting Earth.
+ ************************************************************************/
+
 #pragma once
 
 #include <vector>
@@ -10,6 +19,7 @@
 class ogstream;
 class TestSpaceObject;
 class TestSatellite;
+class TestShip;
 
 /*********************************************
  * SpaceObject
@@ -19,6 +29,7 @@ class SpaceObject
 {
    friend TestSpaceObject;
    friend TestSatellite;
+   friend TestShip;
 
 public:
    /*********************************************

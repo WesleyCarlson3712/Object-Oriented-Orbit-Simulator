@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Source File:
+ *    Velocity : Represents velocity in 2D space
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Implementation of velocity operations and conversions.
+ ************************************************************************/
+
 #include "velocity.h"
 
 double Velocity::getSpeed() const

@@ -9,6 +9,7 @@
 
 #include "gps.h"
 #include "uiDraw.h"
+#include <cmath>
 
  /*********************************************
   * GPS : DEFAULT CONSTRUCTOR
@@ -33,6 +34,20 @@ GPS::GPS(const Position& position,
    Satellite(position, velocity, orientation, rotationRate)
 {
    radius = 12.0;
+   if (!defunct && (position.getMetersX() != 0.0 || position.getMetersY() != 0.0))
+      this->orientation.setRadians(std::atan2(position.getMetersY(), -position.getMetersX()));
+}
+
+/*********************************************
+ * GPS : UPDATE
+ * Advance GPS through physics and maintain
+ * Earth-facing orientation unless defunct.
+ *********************************************/
+void GPS::update(double time)
+{
+   Satellite::update(time);
+   if (!isDefunct())
+      orientation.setRadians(std::atan2(position.getMetersY(), -position.getMetersX()));
 }
 
 /*********************************************

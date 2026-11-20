@@ -2,7 +2,7 @@
  * Source File:
  *    Test Earth : Test the Earth class
  * Author:
- *    Jon, Copilot / Antigravity
+ *    Wesley Carlson
  * Summary:
  *    All the unit tests for Earth
  ************************************************************************/

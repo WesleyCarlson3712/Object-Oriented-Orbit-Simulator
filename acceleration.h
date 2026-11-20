@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Header File:
+ *    Acceleration : Represents acceleration in 2D space
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Represents acceleration components (ddx, ddy) and operations.
+ ************************************************************************/
+
 #pragma once
 
 #include <cmath>

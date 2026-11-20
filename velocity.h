@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Header File:
+ *    Velocity : Represents velocity in 2D space
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Represents velocity components (dx, dy), speed, and direction.
+ ************************************************************************/
+
 #pragma once
 #include <cmath>
 #include "acceleration.h"

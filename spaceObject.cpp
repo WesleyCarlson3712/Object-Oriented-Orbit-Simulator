@@ -1,3 +1,12 @@
+/***********************************************************************
+ * Source File:
+ *    SpaceObject : Base class for physical objects in orbit
+ * Author:
+ *    Wesley Carlson
+ * Summary:
+ *    Implementation of common space object physics and gravity.
+ ************************************************************************/
+
 #include "spaceObject.h"
 
 #include <cassert>
