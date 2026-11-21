@@ -18,6 +18,7 @@
 #include "crewDragon.h"
 #include "starlink.h"
 #include "ship.h"
+#include "star.h"
 #include "test.h"
 #include <vector>
 
@@ -52,6 +53,10 @@ public:
     **********************************************************************/
    void createInitialObjects()
    {
+      // 50 background twinkling stars
+      stars.reserve(50);
+      for (int i = 0; i < 50; ++i)
+         stars.emplace_back(1000.0, 1000.0);
 
       // Sputnik: elliptical, retrograde orbit
       satellites.push_back(new Sputnik(
@@ -130,6 +135,8 @@ public:
 
    void update(double time)
    {
+      for (Star& star : stars)
+         star.update();
 
       ship.update(time);
 
@@ -141,6 +148,8 @@ public:
 
    void draw(ogstream& gout)
    {
+      for (Star& star : stars)
+         star.draw(gout);
 
       earth.draw(gout);
 
@@ -154,6 +163,7 @@ private:
    Ship ship;
    Earth earth;
    std::vector<Satellite*> satellites;
+   std::vector<Star> stars;
 };
 
 /*************************************

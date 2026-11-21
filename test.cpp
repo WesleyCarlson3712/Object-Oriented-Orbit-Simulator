@@ -17,6 +17,7 @@
 #include "testEarth.h"
 #include "testThrust.h"
 #include "testShip.h"
+#include "testStar.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -46,6 +47,7 @@ void testRunner()
    TestEarth().run();
    TestThrust().run();
    TestShip().run();
+   TestStar().run();
 
    std::cout << std::flush;
 }
